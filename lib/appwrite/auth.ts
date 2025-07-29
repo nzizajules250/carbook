@@ -1,4 +1,4 @@
-import { ID } from 'appwrite';
+import { ID, Query } from 'appwrite';
 import { account } from './client';
 import type { Models } from 'appwrite';
 
@@ -83,6 +83,26 @@ export const authService = {
       return user;
     } catch (error: any) {
       throw new Error(error.message || 'Failed to update password');
+    }
+  },
+
+  // Update user name
+  async updateName(name: string): Promise<Models.User<Models.Preferences>> {
+    try {
+      const user = await account.updateName(name);
+      return user;
+    } catch (error: any) {
+      throw new Error(error.message || 'Failed to update name');
+    }
+  },
+
+  // Update user email
+  async updateEmail(email: string, password: string): Promise<Models.User<Models.Preferences>> {
+    try {
+      const user = await account.updateEmail(email, password);
+      return user;
+    } catch (error: any) {
+      throw new Error(error.message || 'Failed to update email');
     }
   }
 };
